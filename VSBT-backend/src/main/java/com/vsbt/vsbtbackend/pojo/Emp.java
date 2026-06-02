@@ -2,6 +2,7 @@ package com.vsbt.vsbtbackend.pojo;
 
 
 import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.AllArgsConstructor;
@@ -10,6 +11,7 @@ import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Data
 @NoArgsConstructor
@@ -33,4 +35,8 @@ public class Emp {
 
     //封装部门名称数
     private String deptName; //部门名称
+
+
+    @TableField(exist = false)
+    private List<EmpExpr> exprList;
 }

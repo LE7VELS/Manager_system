@@ -1,5 +1,8 @@
 package com.vsbt.vsbtbackend.pojo;
 
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 import lombok.AllArgsConstructor;
 
@@ -10,8 +13,10 @@ import java.time.LocalDate;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class EmpExpr {
 
+@TableName("emp_expr")
+public class EmpExpr {
+    @TableId(value = "id", type = IdType.AUTO)
     private Integer id; //ID
     private Integer empId; //员工ID
     private LocalDate begin; //开始时间

@@ -3,6 +3,7 @@ package com.vsbt.vsbtbackend.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.vsbt.vsbtbackend.pojo.Emp;
+import com.vsbt.vsbtbackend.pojo.EmpExpr;
 import com.vsbt.vsbtbackend.pojo.EmpQueryParam;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
@@ -24,4 +25,5 @@ public interface EmpMapper extends BaseMapper<Emp> {
      */
 
     List<Emp> list(EmpQueryParam empQueryParam);
+
 }
