@@ -26,4 +26,10 @@ public interface EmpMapper extends BaseMapper<Emp> {
 
     List<Emp> list(EmpQueryParam empQueryParam);
 
+    /**
+     * 根据id查询员工
+     * @param id
+     * @return
+     */
+    Emp getById(Integer id);
 }

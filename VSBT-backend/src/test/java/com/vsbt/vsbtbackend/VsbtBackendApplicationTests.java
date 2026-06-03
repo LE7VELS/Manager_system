@@ -24,4 +24,11 @@ class VsbtBackendApplicationTests {
         empList.forEach(System.out::println);
     }*/
 
+	@Test
+	public void testEnv() {
+		System.out.println(
+				System.getenv("OSS_ACCESS_KEY_ID")
+		);
+	}
+
 }

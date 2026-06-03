@@ -10,3 +10,12 @@ spring:
 mybatis-plus:
   configuration:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+logging:
+  level:
+    org.springframework.jdbc.support.JdbcTransactionManager: DEBUG
+
+aliyun:
+  oss:
+    endpoint: https://oss-cn-hongkong.aliyuncs.com
+    bucketName: vsbt
+    region: cn-hongkong

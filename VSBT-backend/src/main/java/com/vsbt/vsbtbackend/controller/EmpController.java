@@ -10,6 +10,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @Slf4j
 @RestController
 @RequestMapping("/emps")
@@ -37,6 +39,37 @@ public class EmpController {
     public Result save(@RequestBody Emp emp){
         log.info("保存员工请求参数： {}", emp);
         empService.save(emp);
+        return Result.success();
+    }
+
+    /**
+     * 删除员工
+     * @param id
+     * @return
+     */
+    @DeleteMapping
+    public Result delete(@RequestParam List<Integer> ids){
+        log.info("删除员工请求参数： {}", ids);
+        empService.delete(ids);
+        return Result.success();
+    }
+
+    /**
+     * 根据id查询员工
+     *
+     */
+    @GetMapping("/{id}")
+    public Result get(@PathVariable Integer id){
+        log.info("根据id查询员工请求参数： {}", id);
+        Emp emp = empService.getInfo(id);
+        return Result.success(emp);
+    }
+
+
+    @PutMapping
+    public Result update(@RequestBody Emp emp){
+        log.info("修改员工信息 {}", emp);
+        empService.update(emp);
         return Result.success();
     }
 }

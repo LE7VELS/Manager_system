@@ -11,10 +11,14 @@ import com.vsbt.vsbtbackend.pojo.PageResult;
 import com.vsbt.vsbtbackend.service.EmpService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
 
 import java.time.LocalDateTime;
+import java.util.Arrays;
 import java.util.List;
+
+import static tools.jackson.databind.cfg.CoercionInputShape.Array;
 
 @Service
 public class EmpServiceImpl implements EmpService {
@@ -45,6 +49,7 @@ public class EmpServiceImpl implements EmpService {
      * 保存员工
      * @param emp
      */
+    @Transactional(rollbackFor = Exception.class)
     @Override
     public void save(Emp emp) {
         //设置创建时间和更新时间
@@ -62,4 +67,53 @@ public class EmpServiceImpl implements EmpService {
             empExprMapper.insertExprList(exprList);
         }
     }
+
+    /**
+     * 删除员工
+     * @param ids
+     */
+    @Transactional
+    @Override
+    public void delete(List<Integer> ids) {
+
+        // mybatis-plus 特性
+        empMapper.deleteByIds(ids);
+        empExprMapper.deleteByEmpIds(ids);
+    }
+
+    /**
+     * 根据id查询员工
+     * @param id
+     * @return
+     */
+    @Override
+    public Emp getInfo(Integer id) {
+        return empMapper.getById(id);
+    }
+
+    /**
+     * 更新员工信息
+     * @param emp
+     */
+    @Transactional
+    @Override
+    public void update(Emp emp) {
+        // 员工基本信息
+        emp.setUpdateTime(LocalDateTime.now());
+        empMapper.updateById(emp);
+
+        // 删除旧的员工经历信息
+        empExprMapper.deleteByEmpIds(Arrays.asList(emp.getId()));
+
+        //增加新的员工信息
+
+        Integer empId = emp.getId();
+        List<EmpExpr> exprList = emp.getExprList();
+        if(!CollectionUtils.isEmpty(exprList)){
+            exprList.forEach(expr->expr.setEmpId(empId));
+            empExprMapper.insertExprList(exprList);
+        }
+    }
+
+
 }
