@@ -65,11 +65,26 @@ public class EmpController {
         return Result.success(emp);
     }
 
-
+    /**
+     * 修改员工信息
+     * @param emp
+     * @return
+     */
     @PutMapping
     public Result update(@RequestBody Emp emp){
         log.info("修改员工信息 {}", emp);
         empService.update(emp);
         return Result.success();
+    }
+
+    /**
+     * 获取全部员工信息
+     *
+     */
+    @GetMapping("/list")
+    public Result listAllEmp(){
+        log.info("列出全部员工信息");
+        List<Emp> allEmp = empService.listAllEmp();
+        return Result.success(allEmp);
     }
 }
