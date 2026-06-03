@@ -64,12 +64,21 @@ public class ClazzServiceImpl implements ClazzService {
         return clazzMapper.selectById(id);
     }
 
+    /**
+     * 更新班级数据
+     * @param clzz
+     */
     @Override
     public void update(Clazz clzz) {
         clzz.setUpdateTime(LocalDateTime.now());
         clazzMapper.updateById(clzz);
     }
 
+
+    /**
+     * 删除指定班级
+     * @param id
+     */
     @Override
     public void delete(Integer id) {
         Integer count = studentMapper.countByClazzId(id);
@@ -77,6 +86,11 @@ public class ClazzServiceImpl implements ClazzService {
             throw new RuntimeException("该班级下有学生，无法删除");
         }
         clazzMapper.deleteById(id);
+    }
+
+    @Override
+    public List<Clazz> showAll() {
+        return clazzMapper.selectList(null);
     }
 
 

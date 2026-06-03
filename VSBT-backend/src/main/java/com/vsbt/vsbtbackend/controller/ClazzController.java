@@ -10,6 +10,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @Slf4j
 @RestController
 @RequestMapping("/clazzs")
@@ -67,11 +69,28 @@ public class ClazzController {
         return Result.success();
     }
 
+
+    /**
+     * 删除班级信息
+     * @param id
+     * @return
+     */
     @DeleteMapping("/{id}")
     public Result deleteClazz(@PathVariable Integer id) {
         log.info("删除班级数据信息： {}", id);
         clzzService.delete(id);
         return Result.success();
+    }
+
+    /**
+     * 显示全部班级信息
+     * @return
+     */
+    @GetMapping("/list")
+    public Result listAllClazz() {
+        log.info("显示全部班级信息");
+        List<Clazz> allClzz = clzzService.showAll();
+        return Result.success(allClzz);
     }
 
 }

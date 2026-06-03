@@ -1,6 +1,7 @@
 package com.vsbt.vsbtbackend.service.impl;
 
 import com.vsbt.vsbtbackend.mapper.DeptMapper;
+import com.vsbt.vsbtbackend.mapper.EmpMapper;
 import com.vsbt.vsbtbackend.pojo.Dept;
 import com.vsbt.vsbtbackend.service.DeptService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +15,8 @@ public class DeptServiceImpl implements DeptService {
 
     @Autowired
     private DeptMapper deptMapper;
+    @Autowired
+    private EmpMapper empMapper;
 
     /**
      * 查询全部部门数据
@@ -30,6 +33,10 @@ public class DeptServiceImpl implements DeptService {
      */
     @Override
     public void deleteById(Integer id) {
+        Integer count = empMapper.countByEmpId(id);
+        if (count > 0) {
+            throw new RuntimeException("对不起，当前部门下有员工，不能直接删除！");
+        }
         deptMapper.deleteById(id);
 
     }

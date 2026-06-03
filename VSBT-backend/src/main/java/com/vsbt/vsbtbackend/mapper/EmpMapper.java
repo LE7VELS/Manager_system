@@ -41,5 +41,17 @@ public interface EmpMapper extends BaseMapper<Emp> {
      */
     List<Map<String,Object>> countEmpJobData();
 
+    /**
+     * 统计员工性别数据
+     * @return
+     */
     List<Map<String,Object>> getEmpGenderData();
+
+    /**
+     * 根据班级ID统计员工数量
+     * @param id
+     * @return Integer
+     */
+    @Select("SELECT COUNT(*) FROM emp WHERE dept_id = #{id}")
+    Integer countByEmpId(Integer id);
 }
