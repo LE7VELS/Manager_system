@@ -9,6 +9,7 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 
 import java.util.List;
+import java.util.Map;
 
 
 /**
@@ -32,4 +33,13 @@ public interface EmpMapper extends BaseMapper<Emp> {
      * @return
      */
     Emp getById(Integer id);
+
+
+    /**
+     * 统计员工职位数据
+     * @return
+     */
+    List<Map<String,Object>> countEmpJobData();
+
+    List<Map<String,Object>> getEmpGenderData();
 }
