@@ -4,11 +4,9 @@ import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.vsbt.vsbtbackend.mapper.EmpExprMapper;
 import com.vsbt.vsbtbackend.mapper.EmpMapper;
-import com.vsbt.vsbtbackend.pojo.Emp;
-import com.vsbt.vsbtbackend.pojo.EmpExpr;
-import com.vsbt.vsbtbackend.pojo.EmpQueryParam;
-import com.vsbt.vsbtbackend.pojo.PageResult;
+import com.vsbt.vsbtbackend.pojo.*;
 import com.vsbt.vsbtbackend.service.EmpService;
+import com.vsbt.vsbtbackend.utils.JwtUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -16,7 +14,9 @@ import org.springframework.util.CollectionUtils;
 
 import java.time.LocalDateTime;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import static tools.jackson.databind.cfg.CoercionInputShape.Array;
 
@@ -118,6 +118,27 @@ public class EmpServiceImpl implements EmpService {
     @Override
     public List<Emp> listAllEmp() {
         return empMapper.selectList(null);
+    }
+
+
+    /**
+     * 登录
+     * @param emp
+     * @return
+     */
+    @Override
+    public LoginInfo login(Emp emp) {
+        Emp empLogin = empMapper.getUsernameAndPassword(emp);
+        if(empLogin != null){
+            Map<String,Object> datamap = new HashMap<>();
+            datamap.put("id", empLogin.getId());
+            datamap.put("username", empLogin.getUsername());
+
+            String jwt = JwtUtils.generateJwt(datamap);
+            LoginInfo loginInfo = new LoginInfo(empLogin.getId(), empLogin.getUsername(), empLogin.getName(), jwt);
+            return loginInfo;
+        }
+        return null;
     }
 
 

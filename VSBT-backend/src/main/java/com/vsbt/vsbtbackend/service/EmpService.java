@@ -2,6 +2,7 @@ package com.vsbt.vsbtbackend.service;
 
 import com.vsbt.vsbtbackend.pojo.Emp;
 import com.vsbt.vsbtbackend.pojo.EmpQueryParam;
+import com.vsbt.vsbtbackend.pojo.LoginInfo;
 import com.vsbt.vsbtbackend.pojo.PageResult;
 
 import java.util.List;
@@ -29,7 +30,22 @@ public interface EmpService {
      */
     Emp getInfo(Integer id);
 
+    /**
+     * 更新员工
+     * @param emp
+     */
     void update(Emp emp);
 
+    /**
+     * 查询所有员工
+     * @return
+     */
     List<Emp> listAllEmp();
+
+    /**
+     * 登录
+     * @param emp
+     * @return
+     */
+    LoginInfo login(Emp emp);
 }

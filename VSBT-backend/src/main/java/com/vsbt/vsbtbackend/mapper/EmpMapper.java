@@ -54,4 +54,8 @@ public interface EmpMapper extends BaseMapper<Emp> {
      */
     @Select("SELECT COUNT(*) FROM emp WHERE dept_id = #{id}")
     Integer countByEmpId(Integer id);
+
+
+    @Select("SELECT * FROM emp WHERE username = #{username} AND password = #{password}")
+    Emp getUsernameAndPassword(Emp emp);
 }
