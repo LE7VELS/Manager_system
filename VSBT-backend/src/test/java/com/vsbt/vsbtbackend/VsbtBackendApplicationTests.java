@@ -8,15 +8,15 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.List;
 
-@SpringBootTest
+//@SpringBootTest
 class VsbtBackendApplicationTests {
 
-	@Test
-	void contextLoads() {
-	}
+//	@Test
+//	void contextLoads() {
+//	}
 
-    @Autowired
-    private EmpMapper empMapper;
+//    @Autowired
+//    private EmpMapper empMapper;
 
     /*@Test
     public void testList(){

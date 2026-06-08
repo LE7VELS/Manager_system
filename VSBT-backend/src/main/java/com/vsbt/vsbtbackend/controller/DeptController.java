@@ -1,5 +1,6 @@
 package com.vsbt.vsbtbackend.controller;
 
+import com.vsbt.vsbtbackend.anno.Log;
 import com.vsbt.vsbtbackend.pojo.Dept;
 import com.vsbt.vsbtbackend.pojo.Result;
 import com.vsbt.vsbtbackend.service.DeptService;
@@ -31,6 +32,7 @@ public class DeptController {
      * 删除部门数据
      * @param id 部门ID
      */
+    @Log
     @DeleteMapping
     public Result delete(Integer id) {
         log.info("删除部门数据, id = {}",id);
@@ -43,6 +45,7 @@ public class DeptController {
      * 保存部门数据
      * @param dept 部门对象
      */
+    @Log
     @PostMapping
     public Result save(@RequestBody Dept dept) {
         log.info("保存部门数据, dept = {}" , dept);
@@ -62,7 +65,7 @@ public class DeptController {
         return Result.success(dept);
     }
 
-
+    @Log
     @PutMapping
     public  Result update(@RequestBody Dept dept) {
         log.info("更新部门数据, dept = {}" , dept);
